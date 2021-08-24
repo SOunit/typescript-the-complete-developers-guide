@@ -1,18 +1,19 @@
-const oldCivic = {
-  name: 'civic',
-  year: 2000,
-  broken: true,
-};
-
 // general name with Captal letter start
-interface Vehicle {
-  name: string;
-  year: number;
-  broken: boolean;
+interface Reportable {
+  summary(): string;
 }
 
-const printVehicle = (vehicle: Vehicle): void => {
-  console.log(`name: ${vehicle.name}`);
-  console.log(`year: ${vehicle.year}`);
-  console.log(`broken: ${vehicle.broken}`);
+const oldCivic = {
+  name: 'civic',
+  year: new Date(),
+  broken: true,
+  summary(): string {
+    return `name: ${this.name}`;
+  },
 };
+
+const printSummary = (item: Reportable): void => {
+  console.log(item.summary());
+};
+
+printSummary(oldCivic);
