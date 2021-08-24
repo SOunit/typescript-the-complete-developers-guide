@@ -1,4 +1,8 @@
-import { Router } from 'express';
+import { Router, Request } from 'express';
+
+interface RequestWithBody extends Request {
+  body: { [key: string]: string | undefined };
+}
 
 const router = Router();
 
@@ -18,9 +22,18 @@ router.get('/login', (req, res) => {
   `);
 });
 
-router.post('/login', (req, res) => {
+router.post('/login', (req: RequestWithBody, res) => {
   const { email, password } = req.body;
-  res.send(email + password);
+
+  if (
+    email &&
+    password &&
+    email === 'test@test.com' &&
+    password === 'password'
+  ) {
+  } else {
+    res.send('Invalid email or password');
+  }
 });
 
 export { router };
